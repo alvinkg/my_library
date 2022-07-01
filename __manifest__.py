@@ -1,18 +1,14 @@
 {
-    'name': "My library 2",
+    'name': "My library 2a",
     'summary': "Manage books easily",
-    'description': """
-    Manage Library
-    ==============
-    Description related to library.
-    """,
+    'description': """My Library App """,
     'author': "alvin lim",
     'website': "http://www.konvergenttech.com",
     'category': 'Uncategorized',
-    'version': '13.0.1',
+    'version': '14.0.1',
     'depends': ['base'],
-    'data': ['views/views.xml'],
-    'demo': ['demo.xml'],
+    #'data': ['views/views.xml'],
+    #'demo': ['demo.xml'],
     
     }
 
