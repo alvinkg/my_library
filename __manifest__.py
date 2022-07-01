@@ -1,14 +1,13 @@
 {
-    'name':'My Library 2',
+    'name': "My library 2",
     'summary': "Manage books easily",
-    'description': 
-    """
-        Manage Library
-        ==============
-        Description related to library.
+    'description': """
+    Manage Library
+    ==============
+    Description related to library.
     """,
-    'author': "Your name",
-    'website': "http://www.example.com",
+    'author': "alvin lim",
+    'website': "http://www.konvergenttech.com",
     'category': 'Uncategorized',
     'version': '13.0.1',
     'depends': ['base'],
