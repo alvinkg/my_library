@@ -9,6 +9,7 @@
     'depends': ['base'],
     #'data': ['views/views.xml'],
     #'demo': ['demo.xml'],
+    'application':True,
     
     }
 
