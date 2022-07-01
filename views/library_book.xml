@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-<!-- Data records go here -->
+
     <record id='library_book_action' model='ir.actions.act_window'>
         <field name="name">Library Books</field>
         <field name="res_model">library.book</field>
@@ -22,6 +22,7 @@
                         <field name="author_ids" widget="many2many_tags"/>
                     </group>
                     <group>
+                        <field name="short_name"/>
                         <field name="date_release"/>
                     </group>
                 </group>

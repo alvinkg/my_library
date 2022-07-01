@@ -1,6 +1,11 @@
 from odoo import models, fields
 class Librarybook(models.Model):
     _name = 'library.book'
+    _description = 'Library Book'
+    _order = 'date_release desc, name'
+    _rec_name = 'short_name'
+    short_name = fields.Char('Short Title', required=True)
+    
 
     name=fields.Char('Title', required=True)
     date_release = fields.Date('Release Date')
