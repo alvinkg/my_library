@@ -9,7 +9,7 @@
     'depends': ['base'],
     #'data': ['views/views.xml'],
     #'demo': ['demo.xml'],
-    'application':True,
-    
+    'application': True,
+    'sequence': 0,
     }
 
