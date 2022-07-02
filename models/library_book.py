@@ -17,10 +17,17 @@ class Librarybook(models.Model):
         string='Authors'
 )
 
+    # def name_get(self):
+    #     """This method used to customized the display name of the record"""
+    #     result=[]
+    #     for record in self:
+    #         rec_name='%s (%s)' % (record.name, record.date_release)
+    #         result.append(record.id, rec_name)
+    #     return result
+    
     def name_get(self):
-        """This method used to customized the display name of the record"""
-        result=[]
+        result = []
         for record in self:
-            rec_name='%s (%s)' % (record.name, record.date_release)
-            result.append(record.id, rec_name)
+            rec_name = "%s (%s)" % (record.name, record.date_release)
+            result.append((record.id, rec_name))
         return result
