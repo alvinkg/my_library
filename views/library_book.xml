@@ -32,6 +32,9 @@
                         <field name="cover" widget="image" class="oe_avatar"/>
                         <field name="reader_rating"/>
                         <field name="cost_price"/>
+                        <field name="retail_price"/>
+                        <field name="currency_id"/>
+
                     </group>
                 </group>
                 <group>
