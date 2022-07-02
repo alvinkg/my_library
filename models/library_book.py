@@ -47,6 +47,11 @@ class LibraryBook(models.Model):
         context={},
         domain=[],
         )
+    publisher_city = fields.Char(
+        'Publisher City',
+        related='publisher_id.city',
+        readonly=True
+    )
 
     currency_id = fields.Many2one('res.currency', string='Currency')
     retail_price = fields.Monetary(
@@ -61,6 +66,11 @@ class LibraryBook(models.Model):
         search='_search_age',
         store=False,        # optional
         compute_sudo=True  # optional
+        )
+
+    ref_doc_id = fields.Reference(
+        selection='_referencable_models',
+        string='Reference Document'
         )
 
     @api.depends('date_release')
@@ -98,6 +108,14 @@ class LibraryBook(models.Model):
         for record in self:
             if record.date_release and record.date_release > fields.Date.today():
                 raise models.ValidationError('Release date must be in the past')
+
+    @api.model
+    def _referencable_models(self):
+        models = self.env['ir.model'].search([
+            ('field_id.name', '=', 'message_ids')
+        ])
+        return [(x.model, x.name) for x in models]
+
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
