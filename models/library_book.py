@@ -1,4 +1,8 @@
+# -*- coding: utf-8 -*-
+
 from odoo import models, fields
+
+
 class Librarybook(models.Model):
     _name = 'library.book'
     _description = 'Library Book'
