@@ -7,6 +7,7 @@
         <field name="view_mode">tree,form</field>
     </record>
 
+    <!--Menu-->
     <menuitem name="My Library" id="library_base_menu" />
     <menuitem name="Books" id="library_book_menu"
     parent="library_base_menu" action="library_book_action"/>
@@ -24,6 +25,7 @@
                         <field name="pages"/>
                         <field name="notes"/>
                         <field name="publisher_id"/>
+                        <field name="category_id"/>
                     </group>
                     <group>
                         <field name="short_name"/>
