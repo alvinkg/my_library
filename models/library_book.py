@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields
+from odoo import models, fields, api
+from datetime import timedelta
 
 
-class Librarybook(models.Model):
+class LibraryBook(models.Model):
     _name = 'library.book'
     _description = 'Library Book'
     _order = 'date_release desc, name'
@@ -51,6 +52,31 @@ class Librarybook(models.Model):
         'Retail Price',
         # optional: currency_field='currency_id',
         )
+
+    age_days = fields.Float(
+        string='Days Since Release',
+        compute='_compute_age',
+        inverse='_inverse_age',
+        search='_search_age',
+        store=False,        # optional
+        compute_sudo=True  # optional
+        )
+
+    @api.depends('date_release')
+    def _compute_age(self):
+        today = fields.Date.today()
+        for book in self:
+            if book.date_release:
+                delta = today - book.date_release
+                book.age_days = delta.days
+            else:
+                book.age_days = 0
+
+    def _inverse_age(self):
+        today = fields.Date.today()
+        for book in self.filtered('date_release'):
+            d = today - timedelta(days=book.age_days)
+            book.date_release = d
 
     def name_get(self):
         result = []
