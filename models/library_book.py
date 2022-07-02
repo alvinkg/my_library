@@ -37,10 +37,29 @@ class Librarybook(models.Model):
         'res.partner',
         string='Authors')
     cost_price = fields.Float('Book Cost', digits='Book Price')
-    
+    category_id = fields.Many2one('library.book.category')
+    publisher_id = fields.Many2one(
+        'res.partner', string='Publisher',
+        # optional:
+        ondelete='set null',
+        context={},
+        domain=[],
+    )
+
     def name_get(self):
         result = []
         for record in self:
             rec_name = "%s (%s)" % (record.name, record.date_release)
             result.append((record.id, rec_name))
         return result
+
+
+class ResPartner(models.Model):
+    _inherit = 'res.partner'
+
+    published_book_ids = fields.One2many('library.book', 'publisher_id', string='Published Books')
+    authored_book_ids = fields.Many2many(
+        'library.book',
+        string='Authored Books',
+        # relation='library_book_res_partner_rel'  # optional
+    )

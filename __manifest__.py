@@ -1,5 +1,5 @@
 {
-    'name': "My library 2a",
+    'name': "My library 2",
     'summary': "Manage books easily",
     'description': """My Library App """,
     'author': "alvin lim",
@@ -9,6 +9,7 @@
     'depends': ['base'],
     'data': [
         'views/library_book.xml',
+        'views/library_book_categ.xml',
         'security/groups.xml',
         'security/ir.model.access.csv',
         ],
