@@ -44,7 +44,13 @@ class Librarybook(models.Model):
         ondelete='set null',
         context={},
         domain=[],
-    )
+        )
+
+    currency_id = fields.Many2one('res.currency', string='Currency')
+    retail_price = fields.Monetary(
+        'Retail Price',
+        # optional: currency_field='currency_id',
+        )
 
     def name_get(self):
         result = []
@@ -62,4 +68,15 @@ class ResPartner(models.Model):
         'library.book',
         string='Authored Books',
         # relation='library_book_res_partner_rel'  # optional
-    )
+        )
+
+    published_book_ids = fields.One2many(
+        'library.book', 'publisher_id',
+        string='Published Books'
+        )
+
+    authored_book_ids = fields.Many2many(
+        'library.book',
+        string='Authored Books',
+        # relation='library_book_res_partner_rel'  #optional
+        )
