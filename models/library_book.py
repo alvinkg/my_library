@@ -2,6 +2,7 @@
 
 from odoo import models, fields, api
 from datetime import timedelta
+from odoo.exceptions import ValidationError
 
 
 class LibraryBook(models.Model):
@@ -78,6 +79,13 @@ class LibraryBook(models.Model):
             d = today - timedelta(days=book.age_days)
             book.date_release = d
 
+    _sql_constraints = [
+        ('name_uniq', 'UNIQUE(name)',
+        'Book Title Must Be Unique.'),
+        ('positive_page', 'CHECK(pages>0)',
+        'No. of pages must be positive.')
+    ]
+    
     def name_get(self):
         result = []
         for record in self:
@@ -85,6 +93,11 @@ class LibraryBook(models.Model):
             result.append((record.id, rec_name))
         return result
 
+    @api.constrains('date_release')
+    def _check_release_date(self):
+        for record in self:
+            if record.date_release and record.date_release > fields.Date.today():
+                raise models.ValidationError('Release date must be in the past')
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
