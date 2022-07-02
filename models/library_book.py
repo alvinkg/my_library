@@ -37,7 +37,12 @@ class Librarybook(models.Model):
         'res.partner',
         string='Authors')
     cost_price = fields.Float('Book Cost', digits='Book Price')
-    
+    currency_id = fields.Many2one('res.currency', string='Currency')
+    retail_price = fields.Monetary(
+        'Retail Price',
+        # optional: currency_field='currency_id',
+        )
+
     def name_get(self):
         result = []
         for record in self:
