@@ -23,7 +23,8 @@
                     <button name="make_lost"  string="Make Lost" type="object"/>           
                     <button type="object" name="do_archive" string="Toggle Archive"/>
                     <button name="log_all_library_members"  string="Log Members" type="object"/>
-                     <button name="create_categories" string="Create Categories" type="object"/>
+                    <button name="create_categories" string="Create Categories" type="object"/>
+                    <button name="change_release_date" string="Update Date" type="object"/>           
                     <field name="state" widget="statusbar"/>
                 </header>
                 <group>
