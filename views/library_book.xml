@@ -21,6 +21,7 @@
                     <group>
                         <field name="name"/>
                         <field name="author_ids" widget="many2many_tags"/>
+                        <field name="count_books"/>
                         <field name="state"/>
                         <field name="pages"/>
                         <field name="notes"/>
