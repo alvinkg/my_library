@@ -263,6 +263,30 @@ class LibraryBook(models.Model):
     def get_author_names(self, all_books):
         return all_books.mapped('author_ids.name')
 
+    # Sorting recordset
+    def sort_books(self):
+        all_books = self.search([])
+        books_sorted = self.sort_books_by_date(all_books)
+        for book in all_books:
+            logger.info('Books before sorting: %s', book.name)
+        for book in books_sorted:
+            logger.info('Books after sorting: %s', book.name)
+
+    @api.model
+    def sort_books_by_date(self, all_books):
+        return all_books.sorted(key='name')
+
+    # # sorting recordset
+    # def sorted_by_date(self):
+    #     all_books = self.search([])
+    #     sorted_books = self.sort_books_by_date(all_books)
+    #     logger.info('All Books: %s', all_books)
+    #     logger.info('Sorted Books: %s', sorted_books)
+    #
+    # @api.model
+    # def sort_books_by_date(self, all_books):
+    #     return all_books.sorted(key='date_release')
+
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'

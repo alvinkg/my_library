@@ -27,6 +27,7 @@
                     <button name="change_update_date" string="Update Date" type="object"/>
                     <button name="filter_books" string="Filter Books" type="object"/>
                     <button name="all_authors" string="All Authors" type="object"/>
+                    <button name="sort_books" string="Books by Date" type="object"/>
                     <field name="state" widget="statusbar"/>
                 </header>
                 <group>
