@@ -11,7 +11,8 @@
     <menuitem name="My Library" id="library_base_menu" />
     <menuitem name="Books" id="library_book_menu"
     parent="library_base_menu" action="library_book_action"/>
-
+    
+    <!--Form View-->
     <record id="library_book_view_form" model="ir.ui.view">
         <field name="name">Library Book Form</field>
         <field name="model">library.book</field>
@@ -25,15 +26,18 @@
                     <button name="log_all_library_members"  string="Log Members" type="object"/>
                     <button name="create_categories" string="Create Categories" type="object"/>
                     <button name="change_update_date" string="Update Date" type="object"/>
-                    <button name="filter_books" string="Filter Books" type="object"/>
                     <button name="all_authors" string="All Authors" type="object"/>
+                    <button name="filter_books" string="Filter Books" type="object"/>
                     <button name="sort_books" string="Books by Date" type="object"/>
+                    <button name="find_book" string="Find Book" type="object"/>
                     <field name="state" widget="statusbar"/>
                 </header>
                 <group>
                     <group>
                         <field name="name"/>
                         <field name="author_ids" widget="many2many_tags"/>
+                        <!-- 5.13 -->
+                        <field name="old_edition"/>
                         <field name="count_books"/>
                         <field name="state"/>
                         <field name="pages"/>
@@ -46,6 +50,7 @@
                     <group>
                         <field name="short_name"/>
                         <field name="date_release"/>
+                        <field name="isbn"/>
                         <field name="date_updated"/>
                         <field name="day_to_borrow"/>
                         <field name="date_return"/>
@@ -65,6 +70,7 @@
         </field>
     </record>
 
+    <!-- Tree View -->
     <record id="library_book_view_tree" model="ir.ui.view">
         <field name="name">Library Book List</field>
         <field name="model">library.book</field>
