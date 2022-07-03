@@ -4,12 +4,20 @@ from odoo import models, fields, api
 from datetime import timedelta
 from odoo.exceptions import ValidationError
 
+class BaseArchive(models.AbstractModel):
+    _name = 'base.archive'
+    active = fields.Boolean(default=True)
 
+    def do_archive(self):
+        for record in self:
+            record.active = not record.active
+            
 class LibraryBook(models.Model):
     _name = 'library.book'
     _description = 'Library Book'
     _order = 'date_release desc, name'
     _rec_name = 'short_name'
+    _inherit = ['base.archive']
 
     name=fields.Char('Title', required=True)
     short_name = fields.Char('Short Title', translate=True, index=True, required=True)
@@ -173,3 +181,4 @@ class LibraryMember(models.Model):
     date_end = fields.Date('Termination Date')
     member_number = fields.Char()
     date_of_birth = fields.Date('Date of birth')
+
