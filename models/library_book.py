@@ -49,6 +49,7 @@ class LibraryBook(models.Model):
         digits=(14, 4),  # Optional precision decimals,
     )
     date_release = fields.Date('Release Date')
+    date_return = fields.Date('Date to return')
     date_updated = fields.Datetime('Last Updated')
     author_ids = fields.Many2many(
         'res.partner',
@@ -207,6 +208,7 @@ class LibraryBook(models.Model):
     def change_release_date(self):
         self.ensure_one()
         self.date_release = fields.Date.today()
+
     #option 2
     def change_update_date(self):
         self.ensure_one()
@@ -275,18 +277,7 @@ class LibraryBook(models.Model):
     @api.model
     def sort_books_by_date(self, all_books):
         return all_books.sorted(key='name')
-
-    # # sorting recordset
-    # def sorted_by_date(self):
-    #     all_books = self.search([])
-    #     sorted_books = self.sort_books_by_date(all_books)
-    #     logger.info('All Books: %s', all_books)
-    #     logger.info('Sorted Books: %s', sorted_books)
-    #
-    # @api.model
-    # def sort_books_by_date(self, all_books):
-    #     return all_books.sorted(key='date_release')
-
+        
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
@@ -341,4 +332,3 @@ class LibraryMember(models.Model):
     date_end = fields.Date('Termination Date')
     member_number = fields.Char()
     date_of_birth = fields.Date('Date of birth')
-

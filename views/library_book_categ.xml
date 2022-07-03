@@ -23,6 +23,7 @@
                 <group>
                     <group>
                         <field name='name'/>
+                        <field name='max_borrow_days'/>
                     </group>
                     <group>
                         <field name='parent_id'/>
