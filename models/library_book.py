@@ -8,6 +8,7 @@ from odoo.tools.translate import _
 
 class BaseArchive(models.AbstractModel):
     _name = 'base.archive'
+    _description = 'record archive'
     active = fields.Boolean(default=True)
 
     def do_archive(self):
@@ -172,7 +173,14 @@ class LibraryBook(models.Model):
         ])
         return [(x.model, x.name) for x in models]
 
+    def log_all_library_members(self):
+        # This is an empty recordset of model library.member
+        library_member_model = self.env['library.member']
+        all_members = library_member_model.search([])
+        print("ALL MEMBERS:", all_members)
+        return True
 
+        
 class ResPartner(models.Model):
     _inherit = 'res.partner'
     _order = 'name'
@@ -201,6 +209,7 @@ class ResPartner(models.Model):
         for r in self:
             r.count_books = len(r.authored_book_ids)
 
+
 class LibraryMember(models.Model):
     _name = 'library.member'
     _description = """
@@ -218,6 +227,7 @@ class LibraryMember(models.Model):
         'res.partner',
         ondelete='cascade',
         delegate=True,
+        required=True,
     )
 
     date_start=fields.Date('Member Since')
