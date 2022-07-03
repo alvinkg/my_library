@@ -24,8 +24,8 @@
                     <button type="object" name="do_archive" string="Toggle Archive"/>
                     <button name="log_all_library_members"  string="Log Members" type="object"/>
                     <button name="create_categories" string="Create Categories" type="object"/>
-                    <button name="change_update_date" string="Update Date" type="object"/>           
-                    <button name="find_partner" string="Find Book" type="object"/>
+                    <button name="change_update_date" string="Update Date" type="object"/>
+                    <button name="filter_books" string="filter_books" type="object"/>
                     <field name="state" widget="statusbar"/>
                 </header>
                 <group>

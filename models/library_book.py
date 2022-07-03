@@ -239,6 +239,27 @@ class LibraryBook(models.Model):
         logger.info('Contact found: %s', partner)
         print(partner.name)
 
+    # filter recordset
+    def filter_books(self):
+        all_books = self.search([])
+        filtered_books = self.books_with_multiple_authors(all_books)
+        logger.info('Filtered Books: %s', filtered_books.name)
+
+    @api.model
+    def books_with_multiple_authors(self, all_books):
+        def predicate(book):
+            if len(book.author_ids) > 1:
+                return True
+            return False
+        return all_books.filtered(predicate)
+
+    # @api.model
+    # def books_with_multiple_authors(self, all_books):
+    #     def predicate(book):
+    #         if len(book.author_ids) > 1:
+    #             return True
+    #     return all_books.filtered(predicate)
+
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
