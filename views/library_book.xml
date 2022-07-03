@@ -25,7 +25,8 @@
                     <button name="log_all_library_members"  string="Log Members" type="object"/>
                     <button name="create_categories" string="Create Categories" type="object"/>
                     <button name="change_update_date" string="Update Date" type="object"/>
-                    <button name="filter_books" string="filter_books" type="object"/>
+                    <button name="filter_books" string="Filter Books" type="object"/>
+                    <button name="all_authors" string="All Authors" type="object"/>
                     <field name="state" widget="statusbar"/>
                 </header>
                 <group>
