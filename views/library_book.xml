@@ -28,6 +28,7 @@
                         <field name="publisher_id"/>
                         <field name="publisher_city"/>
                         <field name="category_id"/>
+                        <field name="ref_doc_id"/>
                     </group>
                     <group>
                         <field name="short_name"/>
