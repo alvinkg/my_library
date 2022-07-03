@@ -14,6 +14,8 @@ class BookCategory(models.Model):
     parent_path = fields.Char(index=True)
     
     name = fields.Char('Category')
+    description = fields.Text('Description')
+    email = fields.Text('Email')
     parent_id = fields.Many2one(
         'library.book.category',
         string='Parent Category',
