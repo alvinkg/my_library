@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
+import logging
 
 from odoo import models, fields, api
 from datetime import timedelta
 from odoo.exceptions import UserError, ValidationError
 from odoo.tools.translate import _
+
+logger = logging.getLogger(__name__)
 
 
 class BaseArchive(models.AbstractModel):
@@ -211,6 +214,30 @@ class LibraryBook(models.Model):
             'date_release': fields.Datetime.now(),
             'pages': 4,
         })
+
+    def find_book(self):
+        domain = [
+            '|',
+                '&', ('name', 'ilike', 'book2'),
+                ('category_id.name', 'ilike', 'parent'),
+                '&', ('name', 'ilike', 'long'),
+                ('category_id.name', 'ilike', 'child'),
+            ]
+        books = self.search(domain)
+        logger.info('Books found: %s', books)
+        #for book in books:
+            #print(book.name, book.category_id.name)
+        return True
+
+    def find_partner(self):
+        partnerobj = self.env['res.partner'] # get an empty recordset of partner model
+        domain = [
+            '&', ('name', 'ilike', 'Brandon'), # Freeman
+            ('parent_name', 'ilike', 'Azure'),
+            ]
+        partner = partnerobj.search(domain)
+        logger.info('Contact found: %s', partner)
+        print(partner.name)
 
 
 class ResPartner(models.Model):
