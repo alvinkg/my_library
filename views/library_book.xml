@@ -47,6 +47,8 @@
                         <field name="short_name"/>
                         <field name="date_release"/>
                         <field name="date_updated"/>
+                        <field name="day_to_borrow"/>
+                        <field name="date_return"/>
                         <field name="cover" widget="image" class="oe_avatar"/>
                         <field name="reader_rating"/>
                         <field name="cost_price"/>
