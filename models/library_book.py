@@ -14,7 +14,8 @@ class BaseArchive(models.AbstractModel):
     def do_archive(self):
         for record in self:
             record.active = not record.active
-            
+
+
 class LibraryBook(models.Model):
     _name = 'library.book'
     _description = 'Library Book'
@@ -119,7 +120,6 @@ class LibraryBook(models.Model):
                 msg = _('Moving from %s to %s is not allowed') % (book.state, new_state)
                 raise UserError(msg)
 
-    
     def make_available(self):
         self.change_state('available')
 
@@ -129,7 +129,6 @@ class LibraryBook(models.Model):
     def make_lost(self):
         self.change_state('lost')
         
-
     @api.depends('date_release')
     def _compute_age(self):
         today = fields.Date.today()
@@ -180,7 +179,27 @@ class LibraryBook(models.Model):
         print("ALL MEMBERS:", all_members)
         return True
 
-        
+    def create_categories(self):
+        categ1 = {
+            'name': 'Child category 1',
+            'description': 'Description for child 1',
+            }
+        categ2 = {
+            'name': 'Child category 2',
+            'description': 'Description for child 2',
+            }
+        parent_category_val = {
+            'name': 'Parent category',
+            'description': 'Description for parent category',
+            'child_ids': [
+            (0, 0, categ1),
+            (0, 0, categ2),
+            ]
+        }
+
+        record = self.env['library.book.category'].create(parent_category_val)
+
+
 class ResPartner(models.Model):
     _inherit = 'res.partner'
     _order = 'name'
