@@ -17,6 +17,13 @@
         <field name="model">library.book</field>
         <field name="arch" type="xml">
             <form>
+                <header>
+                    <button name="make_available" string="Make Available" type="object"/>
+                    <button name="make_borrowed"  string="Make Borrowed" type="object"/>
+                    <button name="make_lost"  string="Make Lost" type="object"/>           
+                    <button type="object" name="do_archive" string="Toggle Archive"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
                 <group>
                     <group>
                         <field name="name"/>
