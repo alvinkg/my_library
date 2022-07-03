@@ -200,9 +200,17 @@ class LibraryBook(models.Model):
 
         record = self.env['library.book.category'].create(parent_category_val)
 
+    #option 1
     def change_release_date(self):
         self.ensure_one()
         self.date_release = fields.Date.today()
+    #option 2
+    def change_update_date(self):
+        self.ensure_one()
+        self.update({
+            'date_release': fields.Datetime.now(),
+            'pages': 4,
+        })
 
 
 class ResPartner(models.Model):
