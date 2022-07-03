@@ -253,12 +253,15 @@ class LibraryBook(models.Model):
             return False
         return all_books.filtered(predicate)
 
-    # @api.model
-    # def books_with_multiple_authors(self, all_books):
-    #     def predicate(book):
-    #         if len(book.author_ids) > 1:
-    #             return True
-    #     return all_books.filtered(predicate)
+    # traversing recordset relations
+    def all_authors(self):
+        all_books = self.search([])
+        author_names = self.get_author_names(all_books)
+        logger.info('Author Names: %s', author_names)
+
+    @api.model
+    def get_author_names(self, all_books):
+        return all_books.mapped('author_ids.name')
 
 
 class ResPartner(models.Model):
