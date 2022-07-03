@@ -4,7 +4,7 @@
     'description': """My Library App """,
     'author': "alvin lim",
     'website': "http://www.konvergenttech.com",
-    'category': 'Uncategorized',
+    'category': 'Library',
     'version': '14.0.1',
     'depends': ['base'],
     'data': [
