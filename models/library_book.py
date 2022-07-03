@@ -2,7 +2,9 @@
 
 from odoo import models, fields, api
 from datetime import timedelta
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError, ValidationError
+from odoo.tools.translate import _
+
 
 class BaseArchive(models.AbstractModel):
     _name = 'base.archive'
@@ -112,7 +114,10 @@ class LibraryBook(models.Model):
             if book.is_allowed_transition(book.state, new_state):
                 book.state = new_state
             else:
-                continue
+                #continue
+                msg = _('Moving from %s to %s is not allowed') % (book.state, new_state)
+                raise UserError(msg)
+
     
     def make_available(self):
         self.change_state('available')
