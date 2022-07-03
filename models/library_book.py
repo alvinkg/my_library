@@ -103,6 +103,8 @@ class LibraryBook(models.Model):
         ],
         'State', default="draft")
 
+    manager_remarks = fields.Text('Manager Remarks')
+
     @api.model
     def is_allowed_transition(self, old_state, new_state):
         allowed = [
@@ -277,7 +279,38 @@ class LibraryBook(models.Model):
     @api.model
     def sort_books_by_date(self, all_books):
         return all_books.sorted(key='name')
-        
+
+    # @api.model
+    # def create(self, values):
+    #     if not self.user_has_groups('my_library.group_librarian'):
+    #         if 'manager_remarks' in values:
+    #             raise UserError(
+    #                 'You are not allowed to modify '
+    #                 'manager_remarks'
+    #             )
+    #     return super(LibraryBook, self).create(values)
+
+    @api.model
+    def create(self, values):
+        x = self.user_has_groups('my_library.group_librarian')
+        if not self.user_has_groups('my_library.group_librarian'):
+            if 'manager_remarks' in values:
+                raise UserError(
+                    'You are not allowed to create '
+                    'manager_remarks'
+                )
+        return super(LibraryBook, self).create(values)
+
+    def write(self, values):
+        x = self.user_has_groups('my_library.group_librarian')
+        if not self.user_has_groups('my_library.group_librarian'):
+            if 'manager_remarks' in values:
+                raise UserError(
+                    'You are not allowed to modify '
+                    'manager_remarks'
+                )
+        return super(LibraryBook, self).write(values)    
+
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'

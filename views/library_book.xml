@@ -55,7 +55,7 @@
                         <field name="retail_price"/>
                         <field name="currency_id"/>
                         <field name="age_days"/>
-
+                        <field name="manager_remarks"/>
                     </group>
                 </group>
                 <group>
