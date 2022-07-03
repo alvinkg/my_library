@@ -27,6 +27,8 @@ class LibraryBook(models.Model):
     _inherit = ['base.archive']
 
     name=fields.Char('Title', required=True)
+    #5.13.0
+    isbn = fields.Char('ISBN')
     short_name = fields.Char('Short Title', translate=True, index=True, required=True)
     notes = fields.Text('Internal Notes')
     state = fields.Selection(
@@ -54,6 +56,9 @@ class LibraryBook(models.Model):
     author_ids = fields.Many2many(
         'res.partner',
         string='Authors')
+    #5.13.2
+    old_edition = fields.Many2one('library.book', string='Old Edition')
+
     count_books = fields.Integer(
         'Number of Authored Books',
         related='author_ids.count_books',
@@ -158,12 +163,40 @@ class LibraryBook(models.Model):
         'No. of pages must be positive.')
     ]
     
+    # 5.13.0 replace below code
     def name_get(self):
         result = []
         for record in self:
             rec_name = "%s (%s)" % (record.name, record.date_release)
             result.append((record.id, rec_name))
         return result
+
+    # 5.13.0 New name_get(self)
+    def name_get(self):
+        result = []
+        for record in self:
+            authors = record.author_ids.mapped('name')
+            rec_name = "%s (%s)" % (record.name,','.join(authors))
+            result.append((record.id, rec_name))
+        return result
+
+    #5.13.1 overwrite _name_search(self)
+    @api.model
+    def _name_search(self, name='', args=None, operator='ilike',limit=100, name_get_uid=None):
+        # generate an empty list else make copy of args
+        args=[] if args is None else args.copy()
+        # if there is a search term 'name' entered by user
+        if not(name=='' and operator == 'ilike'):
+            args += ['|', '|', '|',
+                ('name', operator, name),
+                ('isbn', operator, name),
+                ('author_ids.name', operator, name),
+            ]
+        return super(LibraryBook, self)._name_search(
+            name=name, args=args, operator=operator,
+            limit=limit, name_get_uid=name_get_uid
+        )
+
 
     @api.constrains('date_release')
     def _check_release_date(self):
