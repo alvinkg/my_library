@@ -198,7 +198,6 @@ class LibraryBook(models.Model):
             limit=limit, name_get_uid=name_get_uid
         )
 
-
     @api.constrains('date_release')
     def _check_release_date(self):
         for record in self:
@@ -334,7 +333,6 @@ class LibraryBook(models.Model):
         return super(LibraryBook, self).write(values)    
 
     #5.14.3
-
     @api.model
     def x(self, *args):
         grouped_result = self.read_group(
@@ -349,15 +347,24 @@ class LibraryBook(models.Model):
         # logger.info('grouped_result: %s', grouped_result.cost_price)
         return grouped_result
 
+    #6.07.1
+    def y(self):
+        dummy = self.update_book_price()
+        return dummy
+
+    @api.model
+    def update_book_price(self):
+        logger.info('Method update_book_price called from XML')
+        all_books = self.search([])
+        for book in all_books:
+            book.cost_price += 10
+
+    # 6.07.2
     # @api.model
-    # def x(self, *args):
-    #     grouped_result = self.read_group(
-    #         [('cost_price',"!=", False)], #domain
-    #         ['category_id', 'cost_price:avg'], #fields to access
-    #         ['category_id'], #group by
-    #     )
-    #     logger.info('grouped_result: %s', grouped_result)
-    #     return grouped_result
+    # def update_book_price(self, category, amount_to_increase):
+    #     category_books = self.search([('category_id', '=', category.id)])
+    #     for book in category_books:
+    #         book.cost_price += amount_to_increase
 
 
 class ResPartner(models.Model):
