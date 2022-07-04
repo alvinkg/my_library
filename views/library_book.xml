@@ -29,7 +29,7 @@
                     <button name="all_authors" string="All Authors" type="object"/>
                     <button name="filter_books" string="Filter Books" type="object"/>
                     <button name="sort_books" string="Books by Date" type="object"/>
-                    <button name="find_book" string="Find Book" type="object"/>
+                    <button name="x" string="get_average_cost" type="object"/>
                     <field name="state" widget="statusbar"/>
                 </header>
                 <group>
