@@ -10,11 +10,11 @@
     'data': [
         'security/groups.xml',
         'security/ir.model.access.csv',
-        'data/data.xml',
         'views/library_book.xml',
         'views/library_book_categ.xml',
+        'data/data.xml',
         ],
-    #'demo': ['demo.xml'],
+    'demo': ['data/demo.xml'],
     'application': True,
     'sequence': 0,
     }
