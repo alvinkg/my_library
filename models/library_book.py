@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import logging
+from re import X
 
 from odoo import models, fields, api
 from datetime import timedelta
@@ -331,6 +332,32 @@ class LibraryBook(models.Model):
                     'manager_remarks'
                 )
         return super(LibraryBook, self).write(values)    
+
+    #5.14.3
+
+    @api.model
+    def x(self, *args):
+        grouped_result = self.read_group(
+            [('cost_price', "!=", False)], # Domain
+            ['category_id', 'cost_price:avg'], # Fields to access
+            ['category_id'] # group_by
+            )
+        x = grouped_result[0]
+        #avg_price = x['cost_price']
+        avg_price = grouped_result[0]['cost_price']
+        logger.info('Avg Price: %s', avg_price)
+        # logger.info('grouped_result: %s', grouped_result.cost_price)
+        return grouped_result
+
+    # @api.model
+    # def x(self, *args):
+    #     grouped_result = self.read_group(
+    #         [('cost_price',"!=", False)], #domain
+    #         ['category_id', 'cost_price:avg'], #fields to access
+    #         ['category_id'], #group by
+    #     )
+    #     logger.info('grouped_result: %s', grouped_result)
+    #     return grouped_result
 
 
 class ResPartner(models.Model):
