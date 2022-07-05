@@ -1,5 +1,5 @@
 {
-    'name': "My library",
+    'name': "My Library",
     'summary': "Manage books easily",
     'description': """My Library App """,
     'author': "alvin lim",
@@ -12,6 +12,7 @@
         'security/ir.model.access.csv',
         'views/library_book.xml',
         'views/library_book_categ.xml',
+        'views/library_book_rent.xml',
         'data/data.xml',
         ],
     'demo': ['data/demo.xml'],

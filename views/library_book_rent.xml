@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="library_book_rent_action" model="ir.actions.act_window">
+        <field name="name">Book Rental</field>
+        <field name="res_model">library.book.rent</field>
+        <field name="view_mode">form</field>
+    </record>
+
+    <!--Menu-->
+    <menuitem 
+    name="Book Rental" 
+    id="library_book_rent_menu" 
+    parent="library_base_menu" 
+    action="library_book_rent_action"/>
+
+
+    <!--Form View-->
+    <record id="library_book_rent_view_form" model="ir.ui.view">
+        <field name='name'>Library Rental Form</field>
+        <field name='model'>library.book.rent</field>
+        <field name='arch' type='xml'>
+            <form>
+                <group>
+                    <group>
+                        <field name='book_id'/>
+                        <field name='borrower_id'/>
+                    </group>
+                    <group>
+                        <field name='state'/>
+                    </group>
+                </group>
+                <group>
+                    <field name='rent_date'/>
+                    <field name='return_date'/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!--Tree(list)-->
+    <!-- <record id='library_book_rent_view_tree' model='ir.ui.view'>
+        <field name='name'>Library Rental List</field>
+        <field name='model'>library.book.rent</field>
+        <field name='arch' type='xml'>
+            <tree>
+                <field name='name'/>
+                <field name='borrower_id'/>
+            </tree>
+        </field>
+    </record> -->
+    
+</odoo>
