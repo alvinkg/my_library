@@ -393,8 +393,7 @@ class LibraryBook(models.Model):
         sql_query = """
             SELECT
                 lb.name,
-                avg((EXTRACT(epoch from age(return_date, rent_
-        date)) / 86400))::int
+                avg((EXTRACT(epoch from age(return_date, rent_date)) / 86400))::int
             FROM
                 library_book_rent AS lbr
             JOIN
@@ -402,9 +401,9 @@ class LibraryBook(models.Model):
             WHERE lbr.state = 'returned'
             GROUP BY lb.name;"""
 
-        self.env.cr.execute(sql_query)
-        result=self.env.cr.fetchall()
-        logger.info('Average Book Occupation: %s', result)
+        self.env.cr.execute(sql_query) #8.03.4
+        result=self.env.cr.fetchall() #8.03.5
+        logger.info('Average Book Occupation: %s', result) #8.03.5
 
 
 class ResPartner(models.Model):
