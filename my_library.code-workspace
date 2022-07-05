@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "/Users/alvinlim/odoo-dev/odoo14-py392/local/my_library"
+		},
+		{
+			"path": "/Users/alvinlim/odoo-dev/odoo14-py392/local/my_module"
+		}
+
+	],
+	"settings": {}
+}
