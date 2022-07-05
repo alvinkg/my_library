@@ -320,7 +320,7 @@ class LibraryBook(models.Model):
 
     @api.model
     def create(self, values):
-        if not self.user_has_groups('my_library_2.group_librarian'):
+        if not self.user_has_groups('my_library.group_librarian'):
             if 'manager_remarks' in values:
                 raise UserError(
                     'You are not allowed to create '
@@ -329,7 +329,7 @@ class LibraryBook(models.Model):
         return super(LibraryBook, self).create(values)
 
     def write(self, values):
-        if not self.user_has_groups('my_library_2.group_librarian'):
+        if not self.user_has_groups('my_library.group_librarian'):
             if 'manager_remarks' in values:
                 raise UserError(
                     'You are not allowed to modify '
