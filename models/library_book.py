@@ -139,7 +139,11 @@ class LibraryBook(models.Model):
         self.change_state('borrowed')
 
     def make_lost(self):
-        self.change_state('lost')
+        #5.02.6
+        # self.change_state('lost')
+        self.state = 'lost'
+        if not self.env.context.get('avoid_deactivate'):
+            self.active = False
         
     @api.depends('date_release')
     def _compute_age(self):
