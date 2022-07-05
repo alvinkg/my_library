@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import logging
 from re import X
+from unittest import result
 
 from odoo import models, fields, api
 from datetime import timedelta
@@ -385,6 +386,25 @@ class LibraryBook(models.Model):
         logger.info('borrower_id: %s', self.env.user.partner_id.id)
         # logger.info('book_id: %s', self.id.name)
         # logger.info('borrower_id: %s', self.env.user.partner_id.id.name)
+
+    #8.03
+    def average_book_occupation(self): #8.03.1
+        self.flush() #8.03.2
+        sql_query = """
+            SELECT
+                lb.name,
+                avg((EXTRACT(epoch from age(return_date, rent_
+        date)) / 86400))::int
+            FROM
+                library_book_rent AS lbr
+            JOIN
+                library_book as lb ON lb.id = lbr.book_id
+            WHERE lbr.state = 'returned'
+            GROUP BY lb.name;"""
+
+        self.env.cr.execute(sql_query)
+        result=self.env.cr.fetchall()
+        logger.info('Average Book Occupation: %s', result)
 
 
 class ResPartner(models.Model):
