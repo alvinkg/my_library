@@ -31,7 +31,7 @@
                     <button name="sort_books" string="Books by Date" type="object"/>
                     <button name="x" string="get_average_cost" type="object"/>
                     <button name="y" string="y" type="object"/>
-                    <button name="book_rent" string="Rent Book" type="object"/>
+                    <button name="book_rent" string="Rent Book" type="object" class='btn-primary'/>
                     <field name="state" widget="statusbar"/>
                 </header>
                 <group>
