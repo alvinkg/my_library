@@ -359,12 +359,28 @@ class LibraryBook(models.Model):
         for book in all_books:
             book.cost_price += 10
 
-    # 6.07.2
+    # 6.07.2 Issue to implmenent
     # @api.model
     # def update_book_price(self, category, amount_to_increase):
     #     category_books = self.search([('category_id', '=', category.id)])
     #     for book in category_books:
     #         book.cost_price += amount_to_increase
+
+    #8.01 
+    def book_rent(self):
+        self.ensure_one()
+        if self.state != 'available':
+            raise UserError('Book not available.')
+        rent_as_superuser = self.env['library.book.rent'].sudo()
+        rent_as_superuser.create({
+            'book_id': self.id,
+            'borrower_id': self.env.user.partner_id.id,
+        })
+
+        logger.info('book_id: %s', self.id)
+        logger.info('borrower_id: %s', self.env.user.partner_id.id)
+        # logger.info('book_id: %s', self.id.name)
+        # logger.info('borrower_id: %s', self.env.user.partner_id.id.name)
 
 
 class ResPartner(models.Model):
