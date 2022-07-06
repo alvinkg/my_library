@@ -31,9 +31,11 @@
                     <button name="sort_books" string="Books by Date" type="object"/>
                     <button name="x" string="get_average_cost" type="object"/>
                     <button name="y" string="y" type="object"/>
-                    <button name="book_rent" string="Rent Book" type="object" class='btn-primary'/>
+                    <!-- # 8.09.5 -->
+                    <button name="book_rent" string="Rent this Book" type="object" class='btn-primary' groups="my_library.group_self_borrow"/>
+                    <button name="return_all_books" string="Return all book" type="object" class="btn-primary" groups="my_library.group_self_borrow"/>
                     <!-- #8.03.6 -->
-                     <button name="average_book_occupation" string="Log Average Occ." type="object" />
+                     <button name="average_book_occupation" string="Log Average Occ." type="object"/>
                     <field name="state" widget="statusbar"/>
                 </header>
                 <group>

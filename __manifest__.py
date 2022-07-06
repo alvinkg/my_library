@@ -13,6 +13,7 @@
         'views/library_book.xml',
         'views/library_book_categ.xml',
         'views/library_book_rent.xml',
+        'views/res_config_settings_views.xml',
         'views/library_book_rent_statistics.xml',
         'wizard/library_book_rent_wizard.xml',
         'wizard/library_book_return_wizard.xml',

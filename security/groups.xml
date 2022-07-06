@@ -4,4 +4,9 @@
         <field name="name">Librarians</field>
         <field name="users" eval="[(4, ref('base.user_admin'))]"/>
     </record>
+    <!-- 8.09.1 -->
+    <record id="group_self_borrow" model="res.groups">
+        <field name="name">Self Borrow</field>
+        <field name="users" eval="[(4, ref('base.user_admin'))]"/>
+    </record>
 </odoo>
