@@ -23,6 +23,7 @@ class LibraryBookRent(models.Model):
         'State', default='ongoing', required=True)
     rent_date = fields.Date(default=fields.Date.today)
     return_date = fields.Date()
+    publisher_id = fields.Many2one('res.partner', related='book_id.publisher_id', readonly=True)
 
     #5.02.3
     def book_lost(self):
