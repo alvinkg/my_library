@@ -22,5 +22,6 @@
     'demo': ['data/demo.xml'],
     'application': True,
     'sequence': 0,
+    'post_init_hook': 'add_book_hook',
     }
 
