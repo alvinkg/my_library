@@ -2,7 +2,7 @@
 from odoo import models, fields
 
 
-class LibraryRentWizard(models.Model): # 8.04.1
+class LibraryRentWizard(models.TransientModel): # 8.04.1 bug: TransientModel
     _name='library.rent.wizard'
     _description="Rent Wizard"
 
@@ -20,7 +20,7 @@ class LibraryRentWizard(models.Model): # 8.04.1
                     'borrower_id': wiz.borrower_id.id,
                     'book_id': book.id,
                 })
-                
+        # display the form view of the member who has just borrowed the books
         borrowers = self.mapped('borrower_id')
         action = borrowers.get_formview_action()
         if len(borrowers.ids)>1:

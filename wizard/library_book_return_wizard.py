@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 from odoo import models, fields, api
+import logging
+
+logger = logging.getLogger(__name__)
 
 
-class LibraryReturnWizard(models.Model):
+class LibraryReturnWizard(models.TransientModel): # bug:  Model iso TransientModel
     _name = 'library.return.wizard'
     _description="""Return Book Wizard"""
 
@@ -15,12 +18,13 @@ class LibraryReturnWizard(models.Model):
             loans=loanModal.search(
                 [
                     ('state','=','ongoing'),
-                    ('book_id','in',rec.book.ids.ids),
+                    ('book_id','in',rec.book_ids.ids), # bug: rec.book.ids.ids
                     ('borrower_id','=',rec.borrower_id.id)                
                 ]
             )
             for loan in loans:
                 loan.book_return()
+
     
     @api.onchange('borrower_id')
     def onchange_member(self):
@@ -32,3 +36,4 @@ class LibraryReturnWizard(models.Model):
             ]
         )
         self.book_ids=books_on_rent.mapped('book_id')
+        print('hello')
