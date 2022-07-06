@@ -68,8 +68,9 @@
         <field name='arch' type='xml'>
             <tree>
                 <field name='book_id'/>
+                <field name='state'/>
                 <field name='borrower_id'/>
-                <field name='state'/> # add state
+
             </tree>
         </field>
     </record>
