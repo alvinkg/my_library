@@ -69,6 +69,7 @@
             <tree>
                 <field name='book_id'/>
                 <field name='borrower_id'/>
+                <field name='state'/> # add state
             </tree>
         </field>
     </record>

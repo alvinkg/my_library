@@ -37,3 +37,10 @@ class LibraryBookRent(models.Model):
         new_context.update({'avoid_deactivate':True}) # update with new key-value
         book_with_different_context = self.book_id.with_context(new_context) # pass dict new_context
         book_with_different_context.sudo().make_lost()
+
+    # Added code to actually return books
+    def book_return(self):
+        self.ensure_one()
+        self.state = 'returned'
+
+    # TODO: return book status update in library.book too

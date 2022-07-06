@@ -7,6 +7,7 @@ from odoo import models, fields, api
 from datetime import timedelta
 from odoo.exceptions import UserError, ValidationError
 from odoo.tools.translate import _
+from odoo.tests.common import Form # 8.06.1
 
 logger = logging.getLogger(__name__)
 
@@ -364,7 +365,7 @@ class LibraryBook(models.Model):
         for book in all_books:
             book.cost_price += 10
 
-    # 6.07.2 Issue to implmenent
+    # 6.07.2 TODO: Issue to implement
     # @api.model
     # def update_book_price(self, category, amount_to_increase):
     #     category_books = self.search([('category_id', '=', category.id)])
@@ -401,9 +402,18 @@ class LibraryBook(models.Model):
             WHERE lbr.state = 'returned'
             GROUP BY lb.name;"""
 
-        self.env.cr.execute(sql_query) #8.03.4
-        result=self.env.cr.fetchall() #8.03.5
+        self.env.cr.execute(sql_query) # 8.03.4
+        result=self.env.cr.fetchall() # 8.03.5
         logger.info('Average Book Occupation: %s', result) #8.03.5
+
+    def return_all_books(self): # 8.06.2
+        self.ensure_one()
+        wizard=self.env['library.return.wizard'] # 8.06.3
+        with Form(wizard) as return_form: # 8.06.4 creates a virtual form to handle onchange specifications, such as the GUI.
+            #8.06.5 assigned borrower_id in the wizard
+            return_form.borrower_id=self.env.user.partner_id # this triggers the onchange mtd in the wizard model
+            record = return_form.save() # return wizard record
+            record.books_returns()
 
 
 class ResPartner(models.Model):
