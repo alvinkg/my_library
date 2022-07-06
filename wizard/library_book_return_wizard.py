@@ -25,7 +25,7 @@ class LibraryReturnWizard(models.TransientModel): # bug:  Model iso TransientMod
             for loan in loans:
                 loan.book_return()
 
-    
+    # 8.07
     @api.onchange('borrower_id')
     def onchange_member(self):
         rentModel = self.env['library.book.rent']
@@ -36,4 +36,22 @@ class LibraryReturnWizard(models.TransientModel): # bug:  Model iso TransientMod
             ]
         )
         self.book_ids=books_on_rent.mapped('book_id')
-        print('hello')
+
+    # TODO: find out why @api.depends does not work in this odoo
+    # 8.07 Onchange w/ compute mtd
+    # @api.depends('borrower_id')
+    # def onchange_member(self):
+    #     rentModel = self.env['library.book.rent']
+    #     books_on_rent = rentModel.search(
+    #         [
+    #             ('state','=','ongoing'),
+    #             ('borrower_id','=',self.borrower_id.id)
+    #         ]
+    #     )
+    #     book_ids = fields.Many2many(
+    #         'library.book',
+    #         string='Books',
+    #         compute='onchange_member',
+    #         readonly=False,
+    #     )
+    #     self.book_ids=books_on_rent.mapped('book_id')
